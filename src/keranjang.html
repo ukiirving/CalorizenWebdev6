@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Daily</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/01057ef582.js" crossorigin="anonymous"></script>
+    <style>
+        .counter-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .counter {
+            margin: 0 10px;
+            font-weight: bold;
+            width: 40px;
+            text-align: center;
+        }
+        .symbol-button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .total-row {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <div>
+        <nav class="bg-[#9EAE45] flex items-center justify-between drop-shadow-xl">
+            <div class="flex items-center bg-[#84A313] py-5 px-6 h-full">
+                <h1 class="text-white text-xl font-bold drop-shadow-xl">Your Daily</h1>
+            </div>
+            <div class="flex items-center">
+                <i class="fa-solid fa-house" style="color: #FFFFFF;"></i>
+                <a href="index.html">
+                    <i class="fa-solid fa-right-from-bracket text-white p-6"></i>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-full max-w-6xl mx-auto mt-8 p-4 bg-white shadow-lg rounded-lg">
+        <!-- Add data button -->
+        <div class="flex justify-end mb-4">
+            <a href="admin-add-data.html">
+                <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    Add data
+                </button>
+            </a>
+        </div>
+
+        <!-- Table -->
+        <table class="table-auto w-full border-collapse text-center">
+            <thead>
+                <tr class="bg-gray-200 text-gray-700">
+                    <th class="px-4 py-2 border-b">ID</th>
+                    <th class="px-4 py-2 border-b">Image</th>
+                    <th class="px-4 py-2 border-b">Name</th>
+                    <th class="px-4 py-2 border-b">Calories</th>
+                    <th class="px-4 py-2 border-b">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="food-table-body">
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="px-4 py-2 border-b">1</td>
+                    <td class="px-4 py-2 border-b"><img src="./assets/nasi-putih.png" alt="nasi-putih"
+                            class="w-16 h-auto mx-auto"></td>
+                    <td class="px-4 py-2 border-b">White Rice</td>
+                    <td class="px-4 py-2 border-b">129 kcal</td>
+                    <td class="px-4 py-2 border-b">
+                        <div class="counter-container">
+                            <button class="bg-red-500 text-white symbol-button hover:bg-red-600 delete-btn">-</button>
+                            <span class="counter" data-id="1">0</span>
+                            <button class="bg-blue-500 text-white symbol-button hover:bg-blue-600 edit-btn">+</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="px-4 py-2 border-b">2</td>
+                    <td class="px-4 py-2 border-b"><img src="./assets/rendang.png" alt="rendang"
+                            class="w-16 h-auto mx-auto"></td>
+                    <td class="px-4 py-2 border-b">Rendang</td>
+                    <td class="px-4 py-2 border-b">195 kcal</td>
+                    <td class="px-4 py-2 border-b">
+                        <div class="counter-container">
+                            <button class="bg-red-500 text-white symbol-button hover:bg-red-600 delete-btn">-</button>
+                            <span class="counter" data-id="2">0</span>
+                            <button class="bg-blue-500 text-white symbol-button hover:bg-blue-600 edit-btn">+</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="px-4 py-2 border-b">3</td>
+                    <td class="px-4 py-2 border-b"><img src="./assets/coca-cola.png" alt="coca-cola"
+                            class="w-16 h-auto mx-auto"></td>
+                    <td class="px-4 py-2 border-b">Coca-cola</td>
+                    <td class="px-4 py-2 border-b">100 kcal</td>
+                    <td class="px-4 py-2 border-b">
+                        <div class="counter-container">
+                            <button class="bg-red-500 text-white symbol-button hover:bg-red-600 delete-btn">-</button>
+                            <span class="counter" data-id="3">0</span>
+                            <button class="bg-blue-500 text-white symbol-button hover:bg-blue-600 edit-btn">+</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="bg-white hover:bg-gray-100">
+                    <td class="px-4 py-2 border-b">4</td>
+                    <td class="px-4 py-2 border-b"><img src="./assets/bubur.png" alt="bubur"
+                            class="w-16 h-auto mx-auto"></td>
+                    <td class="px-4 py-2 border-b">Chicken Porridge</td>
+                    <td class="px-4 py-2 border-b">372 kcal</td>
+                    <td class="px-4 py-2 border-b">
+                        <div class="counter-container">
+                            <button class="bg-red-500 text-white symbol-button hover:bg-red-600 delete-btn">-</button>
+                            <span class="counter" data-id="4">0</span>
+                            <button class="bg-blue-500 text-white symbol-button hover:bg-blue-600 edit-btn">+</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- Total calorie row -->
+            <tfoot>
+                <tr class="total-row">
+                    <td colspan="4" class="px-4 py-2 text-right">Total Calorie</td>
+                    <td class="px-4 py-2" id="total-calories">0 kcal</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script>
+        // Function to update total calories
+        function updateTotalCalories() {
+            const counters = document.querySelectorAll('.counter');
+            let totalCalories = 0;
+
+            counters.forEach(counter => {
+                const quantity = parseInt(counter.textContent);
+                const row = counter.closest('tr');
+                const calorieText = row.children[3].textContent;
+                const calorieValue = parseInt(calorieText);
+                
+                totalCalories += quantity * calorieValue;
+            });
+
+            document.getElementById('total-calories').textContent = `${totalCalories} kcal`;
+        }
+
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const counter = this.previousElementSibling;
+                counter.textContent = parseInt(counter.textContent) + 1;
+                updateTotalCalories();
+            });
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const counter = this.nextElementSibling;
+                counter.textContent = Math.max(0, parseInt(counter.textContent) - 1); // Prevent negative numbers
+                updateTotalCalories();
+            });
+        });
+
+        // Initial total calories calculation
+        updateTotalCalories();
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,32 +15,39 @@
         }
     </style>
 </head>
+
 <body class="m-0 p-0">
     <div class="w-full h-screen relative">
         <img class="w-full h-full object-cover" src="./assets/background-landing-page.png" alt="background">
-        
+
         <!-- Logo on the left with margin -->
         <div class="absolute top-8 left-12 transition-transform transform hover:scale-105">
-            <img class="h-16" src="./assets/Logo.png" alt="logo">
+            <img class="h-16" src="./assets/Logo.png    " alt="logo">
         </div>
-        
-        <!-- Button on the right -->
-        <div class="absolute top-8 right-12">
-            <button href="login.html" class="text-2xl bg-white bg-opacity-50 text-white px-4 py-2 rounded-xl border-none transition-transform transform hover:scale-105">
-                Log In
-            </button>
-        </div>
-        
+
+            <div class="absolute top-8 right-12">
+        <a href="./login-user-page.html">
+                <h2 class="text-2xl bg-white bg-opacity-50 text-white px-4 py-2 rounded-xl border-none transition-transform transform hover:scale-105">
+                    Log In
+                </h2>
+        </a>
+
+            </div>
+            
+
+
         <!-- Centered content -->
         <div class="absolute inset-0 flex flex-col items-center justify-center space-y-4">
-            <h1 class="text-center text-white text-4xl md:text-5xl font-bold text-shadow transition-transform transform hover:scale-105">
+            <h1
+                class="text-center text-white text-4xl md:text-5xl font-bold text-shadow transition-transform transform hover:scale-105">
                 Welcome to Your<br>Calorie-Counting Companion
             </h1>
-            <h2 class="pt-2 text-center text-white text-2xl md:text-3xl font-semibold text-shadow transition-transform transform hover:scale-105">
+            <h2
+                class="pt-2 text-center text-white text-2xl md:text-3xl font-semibold text-shadow transition-transform transform hover:scale-105">
                 Track Your Daily Intake and Achieve Your Goals
             </h2>
         </div>
-        
+
         <!-- Icons at the bottom with a line above -->
         <div class="absolute bottom-4 w-full flex flex-col items-center">
             <!-- Line with gaps on the sides -->
@@ -54,4 +62,5 @@
         </div>
     </div>
 </body>
+
 </html>
