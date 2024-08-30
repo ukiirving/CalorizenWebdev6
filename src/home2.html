@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the container */
+        .scroll-container {
+            scroll-behavior: smooth; /* Smooth scrolling for user experience */
+            cursor: grab; /* Change cursor to grab */
+            overflow-x: auto; /* Allow horizontal scrolling */
+            white-space: nowrap; /* Prevent line breaks inside container */
+            scroll-snap-type: x mandatory; /* Snap images into place */
+            padding: 1rem; /* Space inside the container */
+            border: 2px solid transparent; /* Border to help with the drag area */
+            scroll-behavior: smooth; /* Smooth scroll behavior */
+        }
+
+        .scroll-container:active {
+            cursor: grabbing; /* Change cursor to grabbing when dragging */
+        }
+
+        .scroll-container img {
+            scroll-snap-align: start; /* Align images to the start */
+            transition: transform 0.3s ease; /* Smooth transition for image scaling */
+            vertical-align: middle; /* Ensure images are centered vertically */
+        }
+
+        .scroll-container img:hover {
+            transform: scale(1.05); /* Slightly zoom in image on hover */
+        }
+    </style>
+</head>
+<body class="bg-green-500 m-0 p-0">
+    <nav class="bg-green-600 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                
+                <!-- Profile Icon (aligned to the left) -->
+                <div class="flex-shrink-0">
+                    <img src="./assets/profile.png" alt="Profile" class="h-8 w-8 rounded-full">
+                </div>
+                
+                <!-- Search Bar with more spacing -->
+                <div class="flex-grow mx-10">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="text" placeholder="Search..." class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-green-500 text-white placeholder-green-300 focus:outline-none focus:bg-white focus:text-gray-900 sm:text-sm transition duration-150 ease-in-out">
+                    </div>
+                </div>
+                
+                <!-- Dropdown and Logout Button with more spacing -->
+                <div class="flex items-center space-x-10">
+                    <div class="relative inline-block text-left">
+                        <select class="appearance-none bg-green-500 border border-green-400 text-white py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-green-600 focus:border-green-500">
+                            <option>Foods</option>
+                            <option>Drinks</option>
+                            <option>Snacks</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Logout Button (aligned to the right) -->
+                     <a href="index.html">
+                    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300">
+                        <img src="./assets/logout.png" alt="logout" class="h-4">
+                    </button>
+                </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Background Image Section -->
+    <section>
+        <img src="./assets/bg.png" alt="njay" class="w-full h-auto">
+    </section>
+    
+    <!-- Section with Second Background Image and Horizontal Scroll Images -->
+    <section class="relative">
+        <img src="./assets/bg2.png" alt="bghome" class="w-full h-auto object-cover">
+        <div class="absolute top-0 w-full flex justify-center items-start pt-10">
+            <h1 class="text-center text-4xl font-bold text-white relative outline-text">
+                For You!
+            </h1>
+        </div>
+        <!-- Horizontal Scroll Container -->
+        <div id="scroll-container" class="scroll-container py-4 absolute bottom-0 w-full flex">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Ayam Crispy.png" alt="Ayam Crispy">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Banana.png" alt="Banana">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Cheese Burger.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Cheese Cake.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Chicken Opor.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Dimsum.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Glazed Donut.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Fried Noodle.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Nasi Goreng.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Martabak.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Jasuke.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Perkedel.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Oatmeal.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Sandwich.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Teriyaki.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Toast.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Sushi.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Sayur Sop.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Spaghetti.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/White Rice.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Yakult.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Air Mineral.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Jus Stroberi.png" alt="Buryam">
+            <img class="inline-block max-h-[90vh] object-contain mr-4" src="./assets/Coca Cola.png" alt="Buryam">
+            <!-- Tambahkan lebih banyak gambar jika perlu -->
+        </div>
+    </section>
+    
+    <!-- New Section with White Background -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto flex justify-center items-center px-16">
+            <div class="w-64 bg-white shadow-lg rounded-lg p-4 border border-gray-200">
+                <div class="flex justify-between items-center mb-4">
+                  <h2 class="text-lg font-semibold">Your Target</h2>
+                  <button class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">Edit</button>
+                </div>
+                
+                <div class="space-y-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Previous Weight"
+                      class="w-full p-2 bg-gray-100 rounded-md text-gray-700 placeholder-gray-500"
+                      readonly
+                    />
+                  </div>
+                  
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Weight Target"
+                      class="w-full p-2 bg-gray-100 rounded-md text-gray-700 placeholder-gray-500"
+                      readonly
+                    />
+                  </div>
+                </div>
+                
+                <button class="w-full bg-green-600 text-white py-2 px-4 rounded-md mt-6 hover:bg-green-700 transition duration-150 ease-in-out">
+                  Done
+                </button>
+              </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for Scroll Horizontal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('scroll-container');
+            let isDragging = false;
+            let startX;
+            let scrollLeft;
+
+            const smoothScroll = (event) => {
+                if (!isDragging) return;
+                event.preventDefault();
+                const x = event.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Kecepatan scroll, 2 adalah multiplier
+                container.scrollLeft = scrollLeft - walk;
+            };
+
+            // Saat mouse ditekan
+            container.addEventListener('mousedown', (event) => {
+                isDragging = true;
+                startX = event.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.style.cursor = 'grabbing'; // Ubah cursor saat dragging
+            });
+
+            // Saat mouse meninggalkan area kontainer
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.style.cursor = 'grab'; // Kembalikan cursor ke grab
+                }
+            });
+
+            // Saat mouse tidak lagi ditekan
+            container.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.style.cursor = 'grab'; // Kembalikan cursor ke grab
+                }
+            });
+
+            // Saat mouse digeser
+            container.addEventListener('mousemove', smoothScroll);
+
+            // Dukungan sentuhan untuk perangkat mobile
+            container.addEventListener('touchstart', (event) => {
+                isDragging = true;
+                startX = event.touches[0].pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.style.cursor = 'grabbing'; // Ubah cursor saat dragging
+            });
+
+            container.addEventListener('touchend', () => {
+                isDragging = false;
+                container.style.cursor = 'grab'; // Kembalikan cursor ke grab
+            });
+
+            container.addEventListener('touchmove', (event) => {
+                if (!isDragging) return;
+                event.preventDefault();
+                const x = event.touches[0].pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Kecepatan scroll, 2 adalah multiplier
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Mencegah gambar dari di-drag
+            container.addEventListener('dragstart', (event) => {
+                event.preventDefault();
+            });
+        });
+    </script>
+
+<section class="bg-green-600 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+        <p class="text-sm">&copy; 2024 Your Company. All rights reserved.</p>
+        <div class="mt-4">
+            <a href="#" class="text-white hover:text-gray-200 mx-2">Privacy Policy</a>
+            <a href="#" class="text-white hover:text-gray-200 mx-2">Terms of Service</a>
+            <a href="#" class="text-white hover:text-gray-200 mx-2">Contact Us</a>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
