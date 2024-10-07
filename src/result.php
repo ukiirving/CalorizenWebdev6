@@ -1,12 +1,54 @@
+<?php
+session_start();
+// Database connection
+$conn = mysqli_connect('localhost', 'root', '', 'calorizen');
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Initialize variables
+$bmr = null;
+
+// Check if form is submitted
+if (isset($_POST['submit'])) {
+    // Get form data
+    $username = $_SESSION['username'];
+    $height = $_POST['height'];
+    $weight = $_POST['weight'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $activity_level = $_POST['activity_level'];
+
+    // Insert query
+    $sql = "UPDATE user SET height='$height', weight='$weight', age='$age', gender='$gender', activity_level='$activity_level' WHERE username='$username'";
+
+    if (mysqli_query($conn, $sql)) {
+        // Calculate BMR
+        if ($gender === 'male') {
+            $bmr = 10 * $weight + 6.25 * $height - 5 * $age + 5;
+        } elseif ($gender === 'female') {
+            $bmr = 10 * $weight + 6.25 * $height - 5 * $age - 161;
+        }
+
+        // Redirect to result page with BMR value
+        header("Location: result.php?bmr=" . urlencode($bmr) . "&activity_level=" . urlencode($activity_level));
+        exit();
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result BMR</title>
-    <!-- Menggunakan Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Link ke Google Fonts untuk font Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -15,7 +57,7 @@
 
         /* Align the title to the left */
         .title-left {
-            text-align: left; /* Align text to the left */
+            text-align: left;
         }
 
         /* Center all other elements */
@@ -56,42 +98,32 @@
     </style>
 </head>
 <body class="relative h-screen w-screen overflow-hidden bg-gray-100">
-    <!-- Background Image -->
     <img class="w-full h-full object-cover absolute top-0 left-0" src="./assets/background-login.png" alt="login background"> 
     
-    <!-- Result Box -->
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-lg rounded-lg w-[500px]">
-        <!-- Title -->
         <h2 class="text-2xl font-bold mb-6 title-left">Your Result</h2>
 
-        <!-- Calorie Result -->
         <div class="center-text">
-            <p class="large-text mb-4">2000 kcal</p> <!-- Example result text, closer to the line -->
+            <?php if (isset($_GET['bmr'])): ?>
+                <p class="large-text mb-4"><?php echo htmlspecialchars($_GET['bmr']); ?> kcal</p> <!-- Display calculated BMR -->
+            <?php else: ?>
+                <p class="large-text mb-4">BMR not available</p>
+            <?php endif; ?>
         </div>
 
-        <!-- Divider Line -->
         <div class="divider"></div>
 
-        <!-- Total Calories Text -->
-        <div class="center-text mb-12"> <!-- Increased gap for more space -->
-            <p class="text-xl">Total calories you had daily</p>
+        <div class="center-text mb-12">
+            <p class="text-xl">Total calories you should consume daily</p>
         </div>
 
-        <!-- Preference Text -->
         <div class="center-text mb-8">
-            <p class="text-xl">Choose which one do you prefer?</p>
+            <p class="text-xl">Choose your goal:</p>
         </div>
 
-        <!-- Buttons -->
         <div class="flex justify-center gap-4">
-            <a href="home2.html"><button class="button">
-                Surplus
-            </button></a>
-            <a href="home2.html">
-            <button class="button">
-                Deficit
-            </button>
-        </a>
+            <a href="home2.html"><button class="button">Surplus</button></a>
+            <a href="home2.html"><button class="button">Deficit</button></a>
         </div>
     </div>
 </body>

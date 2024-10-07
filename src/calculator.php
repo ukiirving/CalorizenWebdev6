@@ -1,3 +1,47 @@
+<?php
+session_start();
+// Database connection
+$conn = mysqli_connect('localhost', 'root', '', 'calorizen');
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Check if form is submitted
+if (isset($_POST['submit'])) {
+    // Get form data
+    $username = $_SESSION['username'];
+    $height = $_POST['height'];
+    $weight = $_POST['weight'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $activity_level = $_POST['activity_level'];
+
+    // Calculate BMR
+    if ($gender === 'male') {
+        $bmr = 10 * $weight + 6.25 * $height - 5 * $age + 5;
+    } elseif ($gender === 'female') {
+        $bmr = 10 * $weight + 6.25 * $height - 5 * $age - 161;
+    }
+
+    // Insert query
+    $sql = "UPDATE user SET height='$height', weight='$weight', age='$age', gender='$gender', activity_level='$activity_level', bmr='$bmr' WHERE username='$username'";
+
+    if (mysqli_query($conn, $sql)) {
+        // Redirect to result page with BMR value
+        header("Location: result.php?bmr=" . urlencode($bmr) . "&activity_level=" . urlencode($activity_level));
+        exit();
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,43 +80,39 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Add shadow below button */
         }
 
-        /* Change color, text color, and border when radio is checked */
         input[type="radio"]:checked + .gender-button {
-            background-color: #9eae45; /* Green background when selected */
-            color: white; /* White text color when selected */
-            border: 2px solid #9eae45; /* Green border color when selected */
+            background-color: #9eae45; 
+            color: white; 
+            border: 2px solid #9eae45; 
         }
 
-        /* Style text input fields to look like gender buttons */
         .form-input {
-            width: calc(33.33% - 10px); /* Make each form input take up one third of the container width, accounting for gaps */
-            height: 60px; /* Set height to match the button style */
-            border-radius: 0.375rem; /* rounded-md in Tailwind */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Add shadow below input */
-            display: flex; /* Use flexbox for centering */
-            align-items: center; /* Center text vertically */
-            justify-content: center; /* Center text horizontally */
-            border: 2px solid black; /* Border style matching the button */
-            background-color: white; /* Background color */
+            width: calc(33.33% - 10px);
+            border-radius: 0.375rem; 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 2px solid black; 
+            background-color: white;
         }
 
         .form-input input {
-            width: 100%; /* Ensure input fills the label */
-            height: 100%; /* Ensure input height matches the button style */
-            border: none; /* Remove default border */
-            text-align: center; /* Center text */
-            font-family: 'Poppins', sans-serif; /* Apply Poppins font */
-            outline: none; /* Remove outline on focus */
+            width: 100%;
+            height: 100%; 
+            border: none; 
+            text-align: center;
+            font-family: 'Poppins', sans-serif; 
+            outline: none; 
         }
 
-        /* Styles for the calculate button */
         .calculate-button {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 12px 24px;
-            background-color: #9eae45; /* Initial background color */
-            color: white; /* Initial text color */
+            background-color: #9eae45; 
+            color: white; 
             font-weight: 600;
             border-radius: 0.375rem;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
@@ -81,54 +121,48 @@
         }
 
         .calculate-button:hover {
-            background-color: white; /* Background changes to white on hover */
-            color: black; /* Text color changes to black on hover */
-            border: 2px solid black; /* Border changes to black on hover */
+            background-color: white; 
+            color: black;
+            border: 2px solid black; 
         }
 
         .calculate-button span {
-            margin-left: 8px; /* Space between text and arrow */
+            margin-left: 8px;
         }
 
-        /* Align the title to the left */
+        
         .title-left {
-            text-align: left; /* Align text to the left */
+            text-align: left;
         }
 
-        /* Custom styles for the dropdown */
         .select-dropdown {
             width: 100%;
-            height: 3rem; /* Adjust height as needed */
+            height: 3rem; 
             border: 2px solid black;
-            border-radius: 0.375rem; /* rounded-md in Tailwind */
+            border-radius: 0.375rem;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             background-color: white;
-            font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+            font-family: 'Poppins', sans-serif; 
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
 
-        /* Apply the hover effect */
         .select-dropdown:hover, .select-dropdown:focus {
-            border-color: #9eae45; /* Green border on hover and focus */
-            background-color: #f0f9e8; /* Light green background on hover and focus */
+            border-color: #9eae45; 
+            background-color: #f0f9e8; 
         }
     </style>
 </head>
 <body class="relative h-screen w-screen overflow-hidden bg-gray-100">
-    <!-- Background Image -->
     <img class="w-full h-full object-cover absolute top-0 left-0" src="./assets/background-login.png" alt="login background"> 
 
-    <!-- Login Box -->
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 shadow-lg rounded-lg w-[500px]">
-        <!-- Title -->
         <h2 class="text-2xl font-bold mb-6 title-left">Calorie Calculator</h2>
 
-        <!-- Gender Label -->
+        <form method="POST">
         <div class="text-left mb-2">
             <label class="block text-sm font-medium text-gray-700">Gender</label>
         </div>
 
-        <!-- Gender Selection Buttons -->
         <div class="flex justify-center gap-4 mb-6">
             <input type="radio" id="male" name="gender" value="male">
             <label for="male" class="gender-button">Male</label>
@@ -137,28 +171,23 @@
             <label for="female" class="gender-button">Female</label>
         </div>
 
-        <!-- Form Inputs styled like buttons, side by side -->
         <div class="flex gap-4 mb-6">
-            <!-- Age Input -->
             <div class="form-input">
-                <input type="number" id="age" name="age" placeholder="Age">
+                <input type="number" id="age" name="age" placeholder="Age" required>
             </div>
 
-            <!-- Weight Input -->
             <div class="form-input">
-                <input type="number" id="weight" name="weight" placeholder="Weight (kg)">
+                <input type="number" id="weight" name="weight" placeholder="Weight (kg) required">
             </div>
 
-            <!-- Height Input -->
             <div class="form-input">
-                <input type="number" id="height" name="height" placeholder="Height (cm)">
+                <input type="number" id="height" name="height" placeholder="Height (cm) required">
             </div>
         </div>
 
-        <!-- Standard Dropdown for Activity Level -->
         <div class="mb-6">
             <label for="activity-level" class="block text-sm font-medium text-gray-700 mb-2">Activity Level</label>
-            <select id="activity-level" name="activity-level" class="select-dropdown">
+            <select id="activity-level" name="activity_level" class="select-dropdown required">
                 <option value="" disabled selected>Select your activity level</option>
                 <option value="lightly-active">Lightly Active (1-3 days to workout/week)</option>
                 <option value="moderately-active">Moderate Active (4-5 days to workout/week)</option>
@@ -168,11 +197,12 @@
 
         <!-- Submit Button -->
         <div class="flex justify-center">
-            <a class="w-full bg-[#9eae45] text-white py-2 px-4 rounded-md hover:bg-[#8ea23e] transition duration-150 ease-in-out block text-center" href="result.html">
-                Calculate
-                <span>&rarr;</span>
-            </a>
+                <button type="submit" name="submit" class="w-full bg-[#9eae45] text-white py-2 px-4 rounded-md hover:bg-[#8ea23e] transition duration-150 ease-in-out">
+                    Calculate
+                    <span>&rarr;</span>
+                </button>
         </div>
+        </form>
     </div>
 </body>
 </html>

@@ -1,3 +1,37 @@
+<?php
+// Database connection
+$conn = mysqli_connect('localhost', 'root', '', 'calorizen');
+
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+// Check if form is submitted
+if (isset($_POST['submit'])) {
+    // Get form data
+    $id = $_POST['id'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Insert query
+    $sql = "INSERT INTO user (id, username, password) VALUES ('$id', '$username', '$password')";
+
+
+    if (mysqli_query($conn, $sql)) {
+        header("location:./login-user-page.php?message=input");
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,13 +71,13 @@
         <!-- Judul kotak login -->
         <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <!-- Formulir login -->
-        <form>
+        <form action="sign-up-page.php" method="post">
             <!-- Input Email dengan ikon di kanan -->
             <div class="mb-4 relative">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                 <div class="relative">
-                    <input type="email" id="email" class="mt-1 block w-full px-4 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="you@example.com">
-                    <img src="./assets/email-icon.png" alt="email icon" class="input-icon">
+                    <input type="username" id="username" name="username" class="mt-1 block w-full px-4 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Username here">
+                    <img src="./assets/email-icon.png" alt="username icon" class="input-icon">
                 </div>
             </div>
             
@@ -51,13 +85,19 @@
             <div class="mb-6 relative">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 <div class="relative">
-                    <input type="password" id="password" class="mt-1 block w-full px-4 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="••••••••">
+                    <input type="password" id="password" name="password" class="mt-1 block w-full px-4 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="••••••••">
                     <img src="./assets/key-icon.png" alt="key icon" class="input-icon">
                 </div>
             </div>
 
             <!-- Tombol Sign Up -->
-            <a class="w-full bg-[#9eae45] text-white py-2 px-4 rounded-md hover:bg-[#8ea23e] transition duration-150 ease-in-out block text-center" href="./login-user-page.html">Sign Up</a>
+             <div>
+             <tr>
+                <td>
+                    <input type="submit" name="submit" class="w-full bg-[#9eae45] text-white py-2 px-4 rounded-md hover:bg-[#8ea23e] transition duration-150 ease-in-out block text-center" value="Sign Up" href="./login-user-page.html">
+                </td>
+             </tr>
+             </div>
         </form>
     </div>
 </body>
